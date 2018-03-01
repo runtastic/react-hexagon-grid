@@ -28,28 +28,28 @@ class HexagonGrid extends Component {
     this.setState(getGridDimensions(props.containerWidth, props.containerWidth, props.hexagons.length));
   }
 
-  getHexStyle(row, col) {
-    const style = {
+  getHexDimensions(row, col) {
+    const dimensions = {
       width: `${this.state.hexWidth}px`,
       height: `${this.state.hexHeight}px`,
       x: col * this.state.hexSize * 3
     };
     if (row % 2 === 1) {
-      style.x += this.state.hexSize * (3 / 2);
+      dimensions.x += this.state.hexSize * (3 / 2);
     }
-    return style;
+    return dimensions;
   }
 
-  getRowStyle(row) {
-    const style = {
+  getRowDimensions(row) {
+    const dimensions = {
       y: `${row * ((this.state.hexSize * (Math.sqrt(3) / 2)))}px`,
       height: `${this.state.hexHeight}px`,
       width: this.props.containerWidth
     };
     if (row % 2 === 0) {
-      style.marginLeft = `${(this.state.size / 2) * 3}px`;
+      dimensions.marginLeft = `${(this.state.size / 2) * 3}px`;
     }
-    return style;
+    return dimensions;
   }
 
   render() {
@@ -63,21 +63,24 @@ class HexagonGrid extends Component {
           Array.from(Array(rows).keys()).map((row) => {
             const remaining = this.props.hexagons.length - iHexagon;
             const columns = remaining < this.state.columns ? remaining : this.state.columns;
-            const rowStyle = this.getRowStyle(row);
+            const rowDim = this.getRowDimensions(row);
             return (
-              <svg key={row} width={rowStyle.width} height={rowStyle.height} y={rowStyle.y}>
+              <svg key={row} width={rowDim.width} height={rowDim.height} y={rowDim.y}>
                 {
                   Array.from(Array(columns).keys()).map((col) => {
                     const hexagon = this.props.hexagons[iHexagon];
-                    const hexStyle = this.getHexStyle(row, col);
+                    const hexDim = this.getHexDimensions(row, col);
                     return (
                       <svg
                         key={iHexagon++}
-                        height={hexStyle.height}
-                        width={hexStyle.width}
-                        x={`${hexStyle.x}px`}
+                        height={hexDim.height}
+                        width={hexDim.width}
+                        x={`${hexDim.x}px`}
                       >
-                        <Hexagon flatTop>
+                        <Hexagon
+                          flatTop
+                          {...this.props.hexProps(hexagon)}
+                        >
                           {
                             _.isFunction(this.props.renderHexagon) ?
                               this.props.renderHexagon(hexagon) : <tspan />
