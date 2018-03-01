@@ -40,3 +40,4 @@ dist
 
 # Other automatically generated files
 .tern-port
+*.DS_Store
