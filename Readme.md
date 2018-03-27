@@ -1,9 +1,7 @@
 # react-hexgrid
 
-<img align="right" width="270" height="313" src="logo/react-hexgrid.svg" alt="react-hexgrid">
-
-React components that renders a fully adaptable grid of flat top hexagons using SVG. The
-component will try to fill the container, properly adapting the size of the hexagons.
+React component that renders a fully adaptable grid of flat-topped hexagons using SVG. The
+component fills the container with the hexagons, properly adapting their size.
 
 ## Installation
 
@@ -31,11 +29,20 @@ React.render(
 );
 ```
 
+See the [demo](./demo/) for a working example.
+
 ## Props
 
-* `containerWidth` -
-* `containerHeight` -
-* `hexagons` -
-* `renderHexagon` -
-* `hexProps` -
+* `containerWidth`  - The width, in pixel, of the grid (**required**)
+* `containerHeight` - Th height, in pixel, of the grid (**required**)
+* `hexagons`        - An array of hexagon objects (**required**)
+* `renderHexagon`   - A function to render each hexagon
+* `hexProps`        - The props that will be assigned to each hexagon
 
+## Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request

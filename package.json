@@ -1,17 +1,19 @@
 {
   "name": "react-hexgrid",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "React Hexagon Grid",
+  "main": "lib/Hexgrid.js",
+  "umd": "lib/Hexgrid.js",
   "scripts": {
-    "build": "npm run clean && npm run build:webpack",
+    "build": "npm run clean && npm run build:babel && npm run build:webpack",
+    "build:babel": "babel -d lib/ src/",
     "build:demo": "cross-env NODE_ENV=production webpack -p --config webpack.config.demo.js",
     "build:webpack": "cross-env NODE_ENV=production webpack -p --config webpack.config.prod.js",
     "clean": "rimraf lib && rimraf umd",
     "test": "eslint .",
     "postpublish": "npm run clean",
     "prepublishOnly": "npm run build",
-    "start": "node demo/devServer.js"
+    "demo": "node demo/devServer.js"
   },
   "repository": {
     "type": "git",

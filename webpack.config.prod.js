@@ -1,5 +1,13 @@
+const path = require('path');
+
 module.exports = {
   entry: './src/HexagonGrid',
+  output: {
+    path: path.join(__dirname, 'umd'),
+    filename: 'Hexagon.js',
+    libraryTarget: 'umd',
+    library: 'reactHexagon'
+  },
   externals: {
     react: {
       root: 'React',
