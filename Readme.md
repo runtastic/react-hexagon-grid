@@ -3,6 +3,8 @@
 React component that renders a fully adaptable grid of flat-topped hexagons using SVG. The
 component fills the container with the hexagons, adapting their size properly.
 
+![react-hexagon-grid.gif](https://thumbs.gfycat.com/FrigidDisloyalFinch-size_restricted.gif)
+
 ## Installation
 
 `react-hexagon-grid` can be installed using [npm](https://npmjs.org/):
