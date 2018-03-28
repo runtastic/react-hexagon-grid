@@ -1,28 +1,28 @@
-# react-hexgrid
+# react-hexagon-grid
 
 React component that renders a fully adaptable grid of flat-topped hexagons using SVG. The
-component fills the container with the hexagons, properly adapting their size.
+component fills the container with the hexagons, adapting their size properly.
 
 ## Installation
 
-`react-hexgrid` can be installed using [npm](https://npmjs.org/):
+`react-hexagon-grid` can be installed using [npm](https://npmjs.org/):
 
 ```
-npm install --save react-hexgrid
+npm install --save react-hexagon-grid
 ```
 
 ## Basic usage
 
 ```javascript
 import React from 'react';
-import HexagonGrid from 'react-hexgrid';
+import HexagonGrid from 'react-hexagon-grid';
 
-const hexagons = [... //Put your content here];
+const hexagons = [... /* Put your content here */];
 
 React.render(
   <HexagonGrid
-    containerWidth=300
-    containerHeight=200
+    gridWidth=300
+    gridHeight=200
     hexagons={hexagons}
   />,
   document.getElementById('root')
@@ -33,11 +33,11 @@ See the [demo](./demo/) for a working example.
 
 ## Props
 
-* `containerWidth`  - The width, in pixel, of the grid (**required**)
-* `containerHeight` - Th height, in pixel, of the grid (**required**)
-* `hexagons`        - An array of hexagon objects (**required**)
-* `renderHexagon`   - A function to render each hexagon
-* `hexProps`        - The props that will be assigned to each hexagon
+* `gridWidth`              - The width, in pixel, of the grid (**required**)
+* `gridHeight`             - The height, in pixel, of the grid (**required**)
+* `hexagons`               - An array of hexagon objects (**required**)
+* `renderHexagonContent`   - A function to render the content of each hexagon
+* `hexProps`               - The props that will be assigned to each hexagon
 
 ## Contributing
 

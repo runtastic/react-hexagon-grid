@@ -1,5 +1,5 @@
 {
-  "name": "react-hexgrid",
+  "name": "react-hexagon-grid",
   "version": "1.0.0",
   "description": "React Hexagon Grid",
   "main": "lib/Hexgrid.js",
@@ -10,7 +10,7 @@
     "build:demo": "cross-env NODE_ENV=production webpack -p --config webpack.config.demo.js",
     "build:webpack": "cross-env NODE_ENV=production webpack -p --config webpack.config.prod.js",
     "clean": "rimraf lib && rimraf umd",
-    "test": "eslint .",
+    "lint": "eslint .",
     "postpublish": "npm run clean",
     "prepublishOnly": "npm run build",
     "demo": "node demo/devServer.js"
@@ -53,7 +53,7 @@
     "webpack-hot-middleware": "^2.21.1"
   },
   "peerDependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react": ">=15.0.0",
+    "react-dom": ">=15.0.0"
   }
 }

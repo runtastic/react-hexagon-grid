@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import isFunction from 'lodash/isFunction';
 import Hexagon from 'react-hexagon';
-
-import { getGridDimensions } from './util/GridUtils';
 
 class HexagonGrid extends Component {
   constructor() {
@@ -25,7 +23,24 @@ class HexagonGrid extends Component {
   }
 
   updateDimensions(props) {
-    this.setState(getGridDimensions(props.containerWidth, props.containerWidth, props.hexagons.length));
+    this.setState(this.getGridDimensions(props.gridWidth,
+      props.gridHeight, props.hexagons.length));
+  }
+
+  getGridDimensions(gridWidth, gridHeight, N) {
+    const a = (6 * gridHeight) / (gridWidth * Math.sqrt(3));
+    const b = (gridHeight / (2 * gridWidth)) - 2;
+
+    const columns = Math.ceil((-b + Math.sqrt((b * b) + (4 * N * a))) / (2 * a));
+
+    const hexSize = Math.floor(gridWidth / ((3 * columns) + 0.5));
+
+    return {
+      columns,
+      hexSize,
+      hexWidth: hexSize * 2,
+      hexHeight: Math.ceil(hexSize * Math.sqrt(3))
+    };
   }
 
   getHexDimensions(row, col) {
@@ -44,7 +59,7 @@ class HexagonGrid extends Component {
     const dimensions = {
       y: `${row * ((this.state.hexSize * (Math.sqrt(3) / 2)))}px`,
       height: `${this.state.hexHeight}px`,
-      width: this.props.containerWidth
+      width: this.props.gridWidth
     };
     if (row % 2 === 0) {
       dimensions.marginLeft = `${(this.state.size / 2) * 3}px`;
@@ -58,7 +73,7 @@ class HexagonGrid extends Component {
     const x = this.props.x ? this.props.x : 0;
     const y = this.props.y ? this.props.y : 0;
     return (
-      <svg width={this.props.containerWidth} height={this.props.containerHeight} x={x} y={y} >
+      <svg width={this.props.gridWidth} height={this.props.gridHeight} x={x} y={y} >
         {
           Array.from(Array(rows).keys()).map((row) => {
             const remaining = this.props.hexagons.length - iHexagon;
@@ -70,6 +85,8 @@ class HexagonGrid extends Component {
                   Array.from(Array(columns).keys()).map((col) => {
                     const hexagon = this.props.hexagons[iHexagon];
                     const hexDim = this.getHexDimensions(row, col);
+                    const hexProps = isFunction(this.props.hexProps) ?
+                            this.props.hexProps(hexagon) : this.props.hexProps;
                     return (
                       <svg
                         key={iHexagon++}
@@ -77,13 +94,10 @@ class HexagonGrid extends Component {
                         width={hexDim.width}
                         x={`${hexDim.x}px`}
                       >
-                        <Hexagon
-                          flatTop
-                          {...this.props.hexProps(hexagon)}
-                        >
+                        <Hexagon {...hexProps} flatTop>
                           {
-                            _.isFunction(this.props.renderHexagon) ?
-                              this.props.renderHexagon(hexagon) : <tspan />
+                            isFunction(this.props.renderHexagonContent) ?
+                              this.props.renderHexagonContent(hexagon) : <tspan />
                           }
                         </Hexagon>
                       </svg>
@@ -100,9 +114,16 @@ class HexagonGrid extends Component {
 }
 
 HexagonGrid.propTypes = {
-  containerWidth: PropTypes.number.isRequired,
-  containerHeight: PropTypes.number.isRequired,
-  hexagons: PropTypes.arrayOf(PropTypes.any).isRequired
+  gridWidth: PropTypes.number.isRequired,
+  gridHeight: PropTypes.number.isRequired,
+  hexagons: PropTypes.arrayOf(PropTypes.any).isRequired,
+  hexProps: PropTypes.object,
+  renderHexagonContent: PropTypes.func
+};
+
+HexagonGrid.defaultProps = {
+  hexProps: {},
+  renderHexagonContent: null
 };
 
 export default HexagonGrid;

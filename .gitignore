@@ -36,7 +36,7 @@ node_modules
 # Compiled JS
 umd
 demo/bundle.js
-dist
+lib
 
 # Other automatically generated files
 .tern-port

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import HexagonGrid from '../src/HexagonGrid';
+import times from 'lodash/times';
 
 class HexGridDemo extends Component {
   getHexProps(hexagon) {
@@ -13,15 +14,31 @@ class HexGridDemo extends Component {
     };
   }
 
+  renderHexagonContent(hexagon) {
+    return (
+      <text
+        x="50%"
+        y="50%"
+        fontSize={100}
+        fontWeight="lighter"
+        style={{ fill: 'white' }}
+        textAnchor="middle"
+      >
+        {hexagon}
+      </text>
+    );
+  }
+
   render () {
-    let hexagons = Array.apply(null, {length: 100}).map(Number.call, Number);
+    let hexagons = times(102, id => id);
 
     return (
       <HexagonGrid
-        containerWidth={500}
-        containerHeight={500}
+        gridWidth={500}
+        gridHeight={500}
         hexagons={hexagons}
         hexProps={this.getHexProps}
+        renderHexagonContent={this.renderHexagonContent}
       />
     );
   }
