@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com:gvassallo/react-hexgrid.git"
+    "url": "git+ssh://git@github.com:runtastic/react-hexagon-grid.git"
   },
   "keywords": [
     "react",
@@ -27,7 +27,7 @@
     "grid",
     "svg"
   ],
-  "author": "Gabriele Vassallo",
+  "author": "Gabriele Vassallo <gabriele.vassallo@runtastic.com>",
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.6.5",
