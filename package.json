@@ -19,9 +19,6 @@
     "type": "git",
     "url": "git+ssh://git@github.com:gvassallo/react-hexgrid.git"
   },
-  "publish-config": {
-    "registry": "https://rtpain-npm-sinopia01.runtastic.com"
-  },
   "keywords": [
     "react",
     "react-component",
