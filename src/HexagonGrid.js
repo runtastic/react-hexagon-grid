@@ -117,7 +117,7 @@ HexagonGrid.propTypes = {
   gridWidth: PropTypes.number.isRequired,
   gridHeight: PropTypes.number.isRequired,
   hexagons: PropTypes.arrayOf(PropTypes.any).isRequired,
-  hexProps: PropTypes.object,
+  hexProps: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   renderHexagonContent: PropTypes.func
 };
 

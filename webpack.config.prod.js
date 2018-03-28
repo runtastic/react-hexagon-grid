@@ -4,9 +4,9 @@ module.exports = {
   entry: './src/HexagonGrid',
   output: {
     path: path.join(__dirname, 'umd'),
-    filename: 'Hexagon.js',
+    filename: 'HexagonGrid.js',
     libraryTarget: 'umd',
-    library: 'reactHexagon'
+    library: 'reactHexagonGrid'
   },
   externals: {
     react: {
