@@ -1,6 +1,7 @@
 {
   "parser": "babel-eslint",
   "extends": "airbnb",
+  "plugins": ["react-hooks"],
   "rules": {
     "max-len": [ 2, 140 ],
     "eqeqeq": [ 2, "always", { "null": "never" }],
@@ -26,6 +27,8 @@
     "react/prop-types": 0,
     "react/jsx-no-bind": 0,
     "react/no-array-index-key": 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "comma-dangle": "off",
     "function-paren-newline": 0,
     "class-methods-use-this": 0
