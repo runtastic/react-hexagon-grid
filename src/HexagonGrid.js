@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import isFunction from 'lodash/isFunction';
 import isEmpty from 'lodash/isEmpty';
+import times from 'lodash/times';
 import Hexagon from 'react-hexagon';
 
 const getGridDimensions = (gridWidth, gridHeight, N) => {
@@ -22,7 +23,11 @@ const getGridDimensions = (gridWidth, gridHeight, N) => {
   };
 };
 
-function HexagonGrid(props) {
+const tryInvoke = (func, params = [], defaultValue = null) => {
+  return isFunction(func) ? func(...params) : defaultValue;
+}
+
+const HexagonGrid = (props) => {
   const {
     hexagons,
     gridHeight,
@@ -71,35 +76,30 @@ function HexagonGrid(props) {
     return dimensions;
   };
 
-  let iHexagon = 0;
-
   return (
     <svg width={gridWidth} height={gridHeight} x={x} y={y} >
       {
-        Array.from(Array(state.rows).keys()).map((row) => {
-          const remaining = hexagons.length - iHexagon;
+        times(state.rows, (row) => {
+          const remaining = hexagons.length - (row * state.columns);
           const columns = remaining < state.columns ? remaining : state.columns;
           const rowDim = getRowDimensions(row);
           return (
             <svg key={row} width={rowDim.width} height={rowDim.height} y={rowDim.y}>
               {
-                Array.from(Array(columns).keys()).map((col) => {
+                times(columns, (col) => {
+                  const iHexagon = (row * columns) + col;
                   const hexagon = hexagons[iHexagon];
                   const hexDim = getHexDimensions(row, col);
-                  const _hexProps = isFunction(hexProps) ?
-                          hexProps(hexagon) : hexProps;
+                  const _hexProps = tryInvoke(hexProps, [hexagon], hexProps);
                   return (
                     <svg
-                      key={iHexagon++}
+                      key={iHexagon}
                       height={hexDim.height}
                       width={hexDim.width}
                       x={`${hexDim.x}px`}
                     >
                       <Hexagon {..._hexProps} flatTop>
-                        {
-                          isFunction(renderHexagonContent) ?
-                            renderHexagonContent(hexagon) : <tspan />
-                        }
+                        { tryInvoke(renderHexagonContent, [hexagon], <tspan />) }
                       </Hexagon>
                     </svg>
                   );
