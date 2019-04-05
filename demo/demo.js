@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import HexagonGrid from '../src/HexagonGrid';
 import times from 'lodash/times';
 
-class HexGridDemo extends Component {
-  getHexProps(hexagon) {
+const HexGridDemo = () =>  {
+  const getHexProps = (hexagon) => {
     return {
       style: {
         fill: '#007aff',
@@ -14,7 +14,7 @@ class HexGridDemo extends Component {
     };
   }
 
-  renderHexagonContent(hexagon) {
+  const renderHexagonContent = (hexagon) => {
     return (
       <text
         x="50%"
@@ -29,19 +29,17 @@ class HexGridDemo extends Component {
     );
   }
 
-  render () {
-    let hexagons = times(102, id => id);
+  let hexagons = times(102, id => id);
 
-    return (
-      <HexagonGrid
-        gridWidth={500}
-        gridHeight={500}
-        hexagons={hexagons}
-        hexProps={this.getHexProps}
-        renderHexagonContent={this.renderHexagonContent}
-      />
-    );
-  }
+  return (
+    <HexagonGrid
+    gridWidth={500}
+    gridHeight={500}
+    hexagons={hexagons}
+    hexProps={getHexProps}
+    renderHexagonContent={renderHexagonContent}
+    />
+  );
 }
 
 ReactDOM.render(
