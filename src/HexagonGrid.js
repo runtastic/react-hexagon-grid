@@ -87,7 +87,7 @@ const HexagonGrid = (props) => {
             <svg key={row} width={rowDim.width} height={rowDim.height} y={rowDim.y}>
               {
                 times(columns, (col) => {
-                  const iHexagon = (row * columns) + col;
+                  const iHexagon = (row * state.columns) + col;
                   const hexagon = hexagons[iHexagon];
                   const hexDim = getHexDimensions(row, col);
                   const _hexProps = tryInvoke(hexProps, [hexagon], hexProps);
